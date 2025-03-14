@@ -1,46 +1,39 @@
 import express from 'express';
-import initDB from './Database/initDB.js';
+import dotenv from 'dotenv';
+import dbController from './Controller/dbController.js';
+import carController from './Controller/carController.js';
+import brandController from './Controller/brandController.js';
+import categoryController from './Controller/categoryController.js';
+
+import { setRelations } from './Model/Relations.js';
+
+dotenv.config();
+setRelations();
+
 
 const app = express();
 const PORT = 3000;
 
-//Initialiser databasen
-initDB();
+app.use(express.json());
+
+// Root route
+app.get('/', async (req, res) => {
+    res.send('Heeey');
+});
+
+// Middleware
+app.use(
+    dbController,
+    carController,
+    brandController,
+    categoryController 
+)
+
 
 
 //Start server
-app.listen(PORT, () => {
-    console.log('Server is running');
-    
+app.listen(PORT, async () => {
+    console.log(`Server kører på http://localhost:${PORT}`);
+
+
 });
-
-
-
-
-
-//Forside
-app.get('/', (req, res) => {
-    res.send('Knock, knock, Neo');
-});
-
-//Biler til salg
-app.get('/cars', (req, res) => {
-    res.send('Biler til salg');
-});
-
-//Hvem er vi?
-app.get('/about', (req, res) => {
-    res.send('Hvem er vi');
-});
-
-//Find os
-app.get('/contact', (req, res) => {
-    res.send('Find os');
-});
-
-//Kontakt os
-app.get('/contact', (req, res) => {
-    res.send('Kontakt os');
-});
-
-

@@ -14,7 +14,8 @@ brandModel.init({
 
     title: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
 
 
