@@ -35,5 +35,4 @@ app.use(
 app.listen(PORT, async () => {
     console.log(`Server kører på http://localhost:${PORT}`);
 
-
 });

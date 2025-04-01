@@ -3,21 +3,6 @@ import categoryModel from '../Model/categoryModel.js';
 
 const categoryController = express.Router();
 
-// Route to get all categories (READ)
-categoryController.get('/categories', async (req, res) => {
-    try {
-        const categories = await categoryModel.findAll(); // Henter alle kategorier
-        res.status(200).json({
-            message: 'Categories retrieved successfully!',
-            categories
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: 'Error occurred while retrieving categories',
-            error: error.message
-        });
-    }
-});
 
 // Route to create a new category (CREATE)
 categoryController.post('/categories', async (req, res) => {
@@ -40,6 +25,24 @@ categoryController.post('/categories', async (req, res) => {
         });
     }
 });
+
+
+// Route to get all categories (READ)
+categoryController.get('/categories', async (req, res) => {
+    try {
+        const categories = await categoryModel.findAll(); // Henter alle kategorier
+        res.status(200).json({
+            message: 'Categories retrieved successfully!',
+            categories
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error occurred while retrieving categories',
+            error: error.message
+        });
+    }
+});
+
 
 // Route to update a category (UPDATE)
 categoryController.put('/categories/:id', async (req, res) => {
